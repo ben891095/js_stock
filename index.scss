@@ -1,0 +1,26 @@
+
+$color_white: #CCCCCC;
+$color_red: #EA0000;
+$color_green: #00DB00;
+
+* {
+    //border: green 1px solid;  
+}
+
+head, body {
+    margin: 0px 0px;
+    padding: 0px 0px;
+    color: $color_white;
+    background: #252932;
+}
+
+.stock_block {
+    margin: 10px;
+    width: 150px;
+    height: 150px;
+    border-radius: 5px; 
+    background: #2B3038;
+    border: 1px #41494F solid;
+
+    box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.4);
+}
