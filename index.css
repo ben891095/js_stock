@@ -9,13 +9,12 @@ head, body {
 
 .stock_group {
   margin: 0 auto;
-  max-width: 1800px; }
+  max-width: 1200px; }
 
 .stock_block {
-  margin-top: 20px;
-  margin-left: 20px;
-  width: 200px;
-  height: 200px;
+  margin: 20px;
+  width: 160px;
+  height: 160px;
   display: inline-block;
   border-radius: 3px;
   background: #0D0D0D;
