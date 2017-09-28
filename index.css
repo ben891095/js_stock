@@ -1,7 +1,4 @@
 @charset "UTF-8";
-* {
-  border: #FFFFFF 1px solid; }
-
 head, body {
   margin: 0px 0px;
   padding: 0px 0px;
@@ -15,9 +12,9 @@ head, body {
 
 .stock_block {
   margin: 20px;
-  padding: 10px 5px;
-  width: 160px;
-  height: 160px;
+  padding: 0px 5px;
+  width: 200px;
+  height: 200px;
   display: inline-block;
   border-radius: 3px;
   background: #0D0D0D;
@@ -25,18 +22,28 @@ head, body {
   -webkit-box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.4);
   box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.4);
   font-weight: bold; }
-  .stock_block .index, .stock_block .name, .stock_block .change, .stock_block .change_range {
-    width: 70px;
+  .stock_block .index, .stock_block .name, .stock_block .change, .stock_block .change_range, .stock_block .volume, .stock_block .volume_total {
+    margin-top: 6px;
+    width: 90px;
     display: inline-block;
-    font-size: 16px; }
-  .stock_block .index, .stock_block .change {
-    padding-left: 16px; }
-  .stock_block .name, .stock_block .change_range {
-    padding-right: 16px;
-    text-align: right;
-    float: right; }
+    font-size: 20px; }
+  .stock_block .index, .stock_block .change, .stock_block .volume {
+    float: left;
+    padding-left: 15px; }
+  .stock_block .name, .stock_block .change_range, .stock_block .volume_total {
+    float: right;
+    padding-right: 15px;
+    text-align: right; }
   .stock_block .deal {
+    float: left;
+    margin-top: 6px;
     width: 100%;
-    height: 50px;
-    font-size: 32px;
+    height: 60px;
+    font-size: 40px;
     text-align: center; }
+  .stock_block .time {
+    float: left;
+    display: inline-block;
+    margin-top: 8px;
+    width: 100%;
+    text-align: right; }
