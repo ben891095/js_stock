@@ -5,13 +5,14 @@ $color_green: #00DB00;
 
 * {
     border: #FFFFFF 1px solid;   
-}
+} 
 
 head, body {
     margin: 0px 0px;
     padding: 0px 0px;
     color: $color_white;
     background: #1A1A1A;
+    font-family: 微軟正黑體;
 }
 
 .stock_group {
@@ -21,6 +22,7 @@ head, body {
 
 .stock_block {
     margin: 20px;
+    padding: 10px 5px;
     width: 160px;
     height: 160px;
     display: inline-block;
@@ -28,4 +30,28 @@ head, body {
     background: #0D0D0D;
     border: 1px #262626 solid;
     box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.4);
+    font-weight: bold;
+    
+    .index, .name, .change, .change_range {
+        width: 70px;
+        display: inline-block;
+        font-size:16px;
+    }
+    
+    .index, .change{
+        padding-left: 16px;
+    }
+    
+    .name, .change_range {
+        padding-right: 16px;
+        text-align: right;
+        float: right;
+    }
+    
+    .deal {
+        width: 100%;
+        height: 50px;
+        font-size: 32px;
+        text-align: center;
+    }
 }
