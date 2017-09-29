@@ -4,7 +4,7 @@ $color_red: #EA0000;
 $color_green: #00DB00;
 
 * {
-    //border: #FFFFFF 1px solid;   
+    border: #FFFFFF 1px solid;   
 } 
 
 head, body {
@@ -32,8 +32,8 @@ head, body {
     box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.4);
     font-weight: bold;
     
-    .index, .name, .change, .change_range, .volume, .volume_total {
-        margin-top: 6px;
+    .index, .name, .change, .change_range, .volume, .volume_total  {
+        margin-top: 10px;
         width: 90px;
         display: inline-block;
         font-size:20px;
@@ -48,23 +48,14 @@ head, body {
         float: right;
         padding-right: 15px;
         text-align: right;
-    }
+    } 
     
     .deal {
         float: left;
         margin-top: 6px;
         width: 100%;
-        height: 60px;
-        font-size: 40px;
+        height: 70px;
+        font-size: 48px;
         text-align: center;
     }
-    
-    .time {
-        float: left;
-        display: inline-block;
-        margin-top: 8px;
-        width: 100%;
-        text-align: right;
-    }
-    
 }

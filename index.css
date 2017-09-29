@@ -1,4 +1,7 @@
 @charset "UTF-8";
+* {
+  border: #FFFFFF 1px solid; }
+
 head, body {
   margin: 0px 0px;
   padding: 0px 0px;
@@ -23,7 +26,7 @@ head, body {
   box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.4);
   font-weight: bold; }
   .stock_block .index, .stock_block .name, .stock_block .change, .stock_block .change_range, .stock_block .volume, .stock_block .volume_total {
-    margin-top: 6px;
+    margin-top: 10px;
     width: 90px;
     display: inline-block;
     font-size: 20px; }
@@ -38,12 +41,6 @@ head, body {
     float: left;
     margin-top: 6px;
     width: 100%;
-    height: 60px;
-    font-size: 40px;
+    height: 70px;
+    font-size: 48px;
     text-align: center; }
-  .stock_block .time {
-    float: left;
-    display: inline-block;
-    margin-top: 8px;
-    width: 100%;
-    text-align: right; }
