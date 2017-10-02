@@ -8,7 +8,7 @@ head, body {
 
 .stock_group {
   margin: 0 auto;
-  max-width: 1200px; }
+  max-width: 1250px; }
 
 .stock_block {
   margin: 20px;
@@ -16,11 +16,9 @@ head, body {
   width: 200px;
   height: 200px;
   display: inline-block;
-  border-radius: 3px;
+  border-radius: 5px;
   background: #0D0D0D;
-  border: 1px #262626 solid;
-  -webkit-box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.4);
-  box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.4);
+  border: 2px #6C6C6C solid;
   font-weight: bold; }
   .stock_block .index, .stock_block .name, .stock_block .change, .stock_block .change_range, .stock_block .volume, .stock_block .volume_total {
     margin-top: 10px;
@@ -41,3 +39,15 @@ head, body {
     height: 70px;
     font-size: 48px;
     text-align: center; }
+
+.bg_red {
+  background: #750000; }
+
+.bg_green {
+  background: #009100; }
+
+.font_red :not(.index):not(.name) {
+  color: #750000; }
+
+.font_green :not(.index):not(.name) {
+  color: #009100; }

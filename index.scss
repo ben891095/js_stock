@@ -1,7 +1,7 @@
 
 $color_white: #CCCCCC;
-$color_red: #EA0000;
-$color_green: #00DB00;
+$color_red: #750000;
+$color_green: #009100;
 
 * {
     //border: #FFFFFF 1px solid;   
@@ -17,7 +17,7 @@ head, body {
 
 .stock_group {
     margin: 0 auto;
-    max-width: 1200px;
+    max-width: 1250px;
 }
 
 .stock_block {
@@ -26,10 +26,9 @@ head, body {
     width: 200px;
     height: 200px;
     display: inline-block;
-    border-radius: 3px; 
+    border-radius: 5px; 
     background: #0D0D0D;
-    border: 1px #262626 solid;
-    box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.4);
+    border: 2px #6C6C6C solid;
     font-weight: bold;
     
     .index, .name, .change, .change_range, .volume, .volume_total  {
@@ -58,4 +57,24 @@ head, body {
         font-size: 48px;
         text-align: center;
     }
+}
+
+//漲停
+.bg_red {
+    background: $color_red;
+}
+
+//跌停 
+.bg_green {
+    background: $color_green;
+}
+
+//漲
+.font_red :not(.index):not(.name){
+    color: $color_red;
+}
+
+//跌
+.font_green :not(.index):not(.name){
+    color: $color_green;
 }
