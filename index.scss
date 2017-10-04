@@ -13,37 +13,64 @@ head, body {
     color: $color_white;
     background: #1A1A1A;
     font-family: 微軟正黑體;
+    font-size:20px;
+}
+
+//讓stock_block 可以置中
+@media only screen and (min-width : 477px) {
+    .stock_group {
+        max-width: 460px;
+    }
+}
+
+@media only screen and (min-width : 707px) {
+    .stock_group {
+        max-width: 690px;
+    }
+}
+
+@media only screen and (min-width : 937px) {
+    .stock_group {
+        max-width: 920px;
+    }
+}
+
+@media only screen and (min-width : 1167px) {
+    .stock_group {
+        max-width: 1150px;
+    }
 }
 
 .stock_group {
-    margin: 0 auto;
-    max-width: 1250px;
+    margin: 20px auto;
 }
 
 .stock_block {
-    margin: 20px;
+    margin: 0px 15px 20px 15px;
     padding: 0px 5px;
     width: 200px;
     height: 200px;
     display: inline-block;
-    border-radius: 5px; 
+    border-radius: 10px; 
     background: #0D0D0D;
     border: 2px #6C6C6C solid;
     font-weight: bold;
+    vertical-align: top;
+    transition: 1s;
+    overflow: hidden;
+    cursor:pointer;
     
-    .index, .name, .change, .change_range, .volume, .volume_total  {
+    .index, .name, .change, .change_range, .volume, .volume_total, .link, .delete  {
         margin-top: 10px;
         width: 90px;
-        display: inline-block;
-        font-size:20px;
     }
     
-    .index, .change, .volume{
+    .index, .change, .volume, .link{
         float: left;
         padding-left: 15px;
     }
     
-    .name, .change_range, .volume_total {
+    .name, .change_range, .volume_total, .delete {
         float: right;
         padding-right: 15px;
         text-align: right;
@@ -57,6 +84,17 @@ head, body {
         font-size: 48px;
         text-align: center;
     }
+    
+    .btn {
+        width: 90%;
+        padding: 0px;
+        font-weight: bold;
+        font-size:18px;
+    }
+}
+
+.stock_block:hover {
+    height: 250px;
 }
 
 //漲停
@@ -70,11 +108,11 @@ head, body {
 }
 
 //漲
-.font_red :not(.index):not(.name){
+.font_red :not(.index):not(.name):not(.btn) {
     color: $color_red;
 }
 
 //跌
-.font_green :not(.index):not(.name){
+.font_green :not(.index):not(.name):not(.btn) {
     color: $color_green;
 }

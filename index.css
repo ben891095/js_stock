@@ -4,31 +4,51 @@ head, body {
   padding: 0px 0px;
   color: #CCCCCC;
   background: #1A1A1A;
-  font-family: 微軟正黑體; }
+  font-family: 微軟正黑體;
+  font-size: 20px; }
+
+@media only screen and (min-width: 477px) {
+  .stock_group {
+    max-width: 460px; } }
+
+@media only screen and (min-width: 707px) {
+  .stock_group {
+    max-width: 690px; } }
+
+@media only screen and (min-width: 937px) {
+  .stock_group {
+    max-width: 920px; } }
+
+@media only screen and (min-width: 1167px) {
+  .stock_group {
+    max-width: 1150px; } }
 
 .stock_group {
-  margin: 0 auto;
-  max-width: 1250px; }
+  margin: 20px auto; }
 
 .stock_block {
-  margin: 20px;
+  margin: 0px 15px 20px 15px;
   padding: 0px 5px;
   width: 200px;
   height: 200px;
   display: inline-block;
-  border-radius: 5px;
+  border-radius: 10px;
   background: #0D0D0D;
   border: 2px #6C6C6C solid;
-  font-weight: bold; }
-  .stock_block .index, .stock_block .name, .stock_block .change, .stock_block .change_range, .stock_block .volume, .stock_block .volume_total {
+  font-weight: bold;
+  vertical-align: top;
+  -webkit-transition: 1s;
+  -o-transition: 1s;
+  transition: 1s;
+  overflow: hidden;
+  cursor: pointer; }
+  .stock_block .index, .stock_block .name, .stock_block .change, .stock_block .change_range, .stock_block .volume, .stock_block .volume_total, .stock_block .link, .stock_block .delete {
     margin-top: 10px;
-    width: 90px;
-    display: inline-block;
-    font-size: 20px; }
-  .stock_block .index, .stock_block .change, .stock_block .volume {
+    width: 90px; }
+  .stock_block .index, .stock_block .change, .stock_block .volume, .stock_block .link {
     float: left;
     padding-left: 15px; }
-  .stock_block .name, .stock_block .change_range, .stock_block .volume_total {
+  .stock_block .name, .stock_block .change_range, .stock_block .volume_total, .stock_block .delete {
     float: right;
     padding-right: 15px;
     text-align: right; }
@@ -39,6 +59,14 @@ head, body {
     height: 70px;
     font-size: 48px;
     text-align: center; }
+  .stock_block .btn {
+    width: 90%;
+    padding: 0px;
+    font-weight: bold;
+    font-size: 18px; }
+
+.stock_block:hover {
+  height: 250px; }
 
 .bg_red {
   background: #750000; }
@@ -46,8 +74,8 @@ head, body {
 .bg_green {
   background: #009100; }
 
-.font_red :not(.index):not(.name) {
+.font_red :not(.index):not(.name):not(.btn) {
   color: #750000; }
 
-.font_green :not(.index):not(.name) {
+.font_green :not(.index):not(.name):not(.btn) {
   color: #009100; }
