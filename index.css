@@ -5,7 +5,11 @@ head, body {
   color: #CCCCCC;
   background: #1A1A1A;
   font-family: 微軟正黑體;
-  font-size: 20px; }
+  font-size: 20px;
+  font-weight: bold; }
+
+.navbar-inverse {
+  background: #0D0D0D; }
 
 @media only screen and (min-width: 477px) {
   .stock_group {
@@ -35,7 +39,6 @@ head, body {
   border-radius: 10px;
   background: #0D0D0D;
   border: 2px #6C6C6C solid;
-  font-weight: bold;
   vertical-align: top;
   -webkit-transition: 1s;
   -o-transition: 1s;
@@ -74,8 +77,12 @@ head, body {
 .bg_green {
   background: #009100; }
 
-.font_red :not(.index):not(.name):not(.btn) {
-  color: #750000; }
+.font_red {
+  color: #750000 !important; }
+  .font_red .index, .font_red .name, .font_red .btn {
+    color: #CCCCCC; }
 
-.font_green :not(.index):not(.name):not(.btn) {
-  color: #009100; }
+.font_green {
+  color: #009100 !important; }
+  .font_green .index, .font_green .name, .font_green .btn {
+    color: #CCCCCC; }

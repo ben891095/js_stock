@@ -14,6 +14,11 @@ head, body {
     background: #1A1A1A;
     font-family: 微軟正黑體;
     font-size:20px;
+    font-weight: bold;
+}
+
+.navbar-inverse {
+    background: #0D0D0D;
 }
 
 //讓stock_block 可以置中
@@ -54,7 +59,6 @@ head, body {
     border-radius: 10px; 
     background: #0D0D0D;
     border: 2px #6C6C6C solid;
-    font-weight: bold;
     vertical-align: top;
     transition: 1s;
     overflow: hidden;
@@ -108,11 +112,19 @@ head, body {
 }
 
 //漲
-.font_red :not(.index):not(.name):not(.btn) {
-    color: $color_red;
+.font_red  {
+    color: $color_red !important;
+    
+    .index, .name, .btn {
+        color: $color_white;
+    }
 }
 
 //跌
-.font_green :not(.index):not(.name):not(.btn) {
-    color: $color_green;
+.font_green {
+    color: $color_green !important;
+    
+    .index, .name, .btn {
+        color: $color_white;
+    }
 }

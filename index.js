@@ -1,6 +1,11 @@
 
 var cookie_name = 'cookie_stock';
-console.log(js_get_cookie(cookie_name));
+//設定更新時間(秒)
+var set_count_down = 181; 
+//剩餘時間
+var count_down = set_count_down; 
+var switch_count_down = true; 
+//console.log(js_get_cookie(cookie_name));
 
 /* ajax 股票取資料
  * 
@@ -22,7 +27,6 @@ function yahoo_stock_data (stock_index, func) {
 /* 產生股票方塊
  * 
  */
-gen_stock_block ();
 function gen_stock_block () {
     //股票方塊清空
     $(".stock_block").remove();
@@ -48,10 +52,38 @@ function gen_stock_block () {
     });
 }
 
+/* 載入上市上櫃資料
+ * 
+ */
+load_index_stock();
+function load_index_stock () {
+    var stock_index = {'tse':'%23001', 'otc':'%23026'};
+    
+    $.each(stock_index, function(key, value) {
+        yahoo_stock_data(value, function(stock_data) {
+            //console.log(stock_data);
+            stock_data = stock_data['mem'];
+            var change = parseFloat(stock_data['184']);
+            var this_index_stock = $('.'+key);
+            
+            var index_str = stock_data['name']+' '+stock_data['125'];
+            if (change > 0) {
+                this_index_stock.addClass('font_red');
+                index_str = index_str + '▲'+change;
+            }
+            else if (change < 0){
+                this_index_stock.addClass('font_green');
+                index_str = index_str + '▲'+change;
+            }
+            
+            this_index_stock.text(index_str);
+        });
+    });
+}
+
 /* 股票方塊 載入資料
  * 
  */
-load_stock_data ();
 function load_stock_data () {
     //股票列表
     var stock_array = js_get_cookie(cookie_name).split(',');
@@ -97,6 +129,61 @@ function load_stock_data () {
     });
 }
 
+//控制股票更新資料 
+function control_load_stock() {
+    load_stock_data();
+
+    //產生時間字串
+    var d = new Date();
+    $('.now').text('更新時間 '+ d.getHours()+':'+d.getMinutes()+':'+d.getSeconds());
+    
+    //重新計時
+    count_down = set_count_down; 
+}
+
+//倒數計時器
+function countdown() {  
+    if (switch_count_down) {
+        count_down = count_down - 1;
+        
+        $('.count_down').text('倒數更新 ' + count_down);
+        
+        if (count_down <= 0) {
+            control_load_stock();
+        }
+    }
+    
+    setTimeout(function () {
+        countdown();
+    },1000);
+}
+
+//網站載入完成 執行
+$(document).ready(function() {
+     countdown();
+     gen_stock_block();
+     control_load_stock();
+});
+
+//手動更新 報價
+$('.btn_load_stock').click(function () {
+    control_load_stock();
+});
+
+//設定倒數計時開關
+$('.btn_switch').click(function () {
+    if (switch_count_down) {
+        switch_count_down = false; 
+        $(this).text('開啟自動更新');
+    }
+    else {
+        switch_count_down = true; 
+        $(this).text('停止自動更新');
+    }
+    
+    $(this).toggleClass("btn-success btn-warning");
+});
+
 //新增股票
 $('.btn_add').click(function () {
     //alert($('input[name=index]').val());
@@ -133,8 +220,8 @@ $('.btn_add').click(function () {
         
         $('input[name=index]').val('');
         
-        gen_stock_block ();
-        load_stock_data ();
+        gen_stock_block();
+        load_stock_data();
     });
 });
 
@@ -153,8 +240,8 @@ $(document).on('click', '.btn_del', function() {
         //寫入cookie
         js_set_cookie(cookie_name, stock_array.join());    
         
-        gen_stock_block ();
-        load_stock_data ();
+        gen_stock_block();
+        load_stock_data();
     }
 });
 
