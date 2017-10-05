@@ -21,6 +21,10 @@ head, body {
     background: #0D0D0D;
 }
 
+.navbar-right {
+    margin-right: 0px;
+}
+
 //讓stock_block 可以置中
 @media only screen and (min-width : 477px) {
     .stock_group {
@@ -46,6 +50,7 @@ head, body {
     }
 }
 
+
 .stock_group {
     margin: 20px auto;
 }
@@ -60,7 +65,7 @@ head, body {
     background: #0D0D0D;
     border: 2px #6C6C6C solid;
     vertical-align: top;
-    transition: 1s;
+    
     overflow: hidden;
     cursor:pointer;
     
@@ -99,6 +104,11 @@ head, body {
 
 .stock_block:hover {
     height: 250px;
+    transition: 1s;
+}
+
+.highlighted {
+    background: #FFFF6F;
 }
 
 //漲停

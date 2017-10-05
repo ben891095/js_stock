@@ -11,6 +11,9 @@ head, body {
 .navbar-inverse {
   background: #0D0D0D; }
 
+.navbar-right {
+  margin-right: 0px; }
+
 @media only screen and (min-width: 477px) {
   .stock_group {
     max-width: 460px; } }
@@ -40,9 +43,6 @@ head, body {
   background: #0D0D0D;
   border: 2px #6C6C6C solid;
   vertical-align: top;
-  -webkit-transition: 1s;
-  -o-transition: 1s;
-  transition: 1s;
   overflow: hidden;
   cursor: pointer; }
   .stock_block .index, .stock_block .name, .stock_block .change, .stock_block .change_range, .stock_block .volume, .stock_block .volume_total, .stock_block .link, .stock_block .delete {
@@ -69,7 +69,13 @@ head, body {
     font-size: 18px; }
 
 .stock_block:hover {
-  height: 250px; }
+  height: 250px;
+  -webkit-transition: 1s;
+  -o-transition: 1s;
+  transition: 1s; }
+
+.highlighted {
+  background: #FFFF6F; }
 
 .bg_red {
   background: #750000; }

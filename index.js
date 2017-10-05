@@ -5,7 +5,7 @@ var set_count_down = 181;
 //剩餘時間
 var count_down = set_count_down; 
 var switch_count_down = true; 
-//console.log(js_get_cookie(cookie_name));
+console.log(js_get_cookie(cookie_name));
 
 /* ajax 股票取資料
  * 
@@ -44,7 +44,7 @@ function gen_stock_block () {
                 "<div class='change_range'></div>" +
                 "<div class='volume'></div>" +
                 "<div class='volume_total'></div>" +
-                "<div class='link'><button class='btn btn-info btn-sm'>連結</button></div>" +
+                "<div class='link'><a class='btn btn-info btn-sm' href='http://pchome.megatime.com.tw/stock/sto0/ock1/sid"+value+".html' target='_blank'>連結</a></div>" +
                 "<div class='delete'><button class='btn btn-danger btn-sm btn_del'>刪除</button></div>" +
             "</div>";
             
@@ -55,7 +55,6 @@ function gen_stock_block () {
 /* 載入上市上櫃資料
  * 
  */
-load_index_stock();
 function load_index_stock () {
     var stock_index = {'tse':'%23001', 'otc':'%23026'};
     
@@ -99,6 +98,14 @@ function load_stock_data () {
             var limit_up = parseFloat(stock_data['132']);
             var limit_down = parseFloat(stock_data['133']);
             
+            //highlighted background
+            if (stock_data['404'] != this_stock_block.find('.volume_total').text()) {
+                this_stock_block.addClass('highlighted');
+                 setTimeout(function () {
+                    this_stock_block.removeClass('highlighted');
+                }, 500);
+            }
+            
             this_stock_block.find('.index').text(stock_data['id']);
             this_stock_block.find('.name').text(stock_data['name']);
             this_stock_block.find('.deal').text(stock_data['125']);
@@ -131,8 +138,10 @@ function load_stock_data () {
 
 //控制股票更新資料 
 function control_load_stock() {
+    
+    load_index_stock();
     load_stock_data();
-
+    
     //產生時間字串
     var d = new Date();
     $('.now').text('更新時間 '+ d.getHours()+':'+d.getMinutes()+':'+d.getSeconds());
@@ -160,9 +169,9 @@ function countdown() {
 
 //網站載入完成 執行
 $(document).ready(function() {
-     countdown();
-     gen_stock_block();
-     control_load_stock();
+    countdown();
+    gen_stock_block();
+    control_load_stock();
 });
 
 //手動更新 報價
@@ -186,7 +195,6 @@ $('.btn_switch').click(function () {
 
 //新增股票
 $('.btn_add').click(function () {
-    //alert($('input[name=index]').val());
     var stock_index = $('input[name=index]').val();
     var stock_str = js_get_cookie(cookie_name);
 

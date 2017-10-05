@@ -27,22 +27,21 @@
     <nav class='navbar navbar-inverse'>
         <div class='container-fluid'>
             <ul class='nav navbar-nav'>
+                <li><p class='navbar-text tse'></p></li>
+                <li><p class='navbar-text otc'></p></li>
+            </ul>
+            <ul class='nav navbar-nav navbar-right'>
                 <li><p class='navbar-text now'></p></li>
                 <li><p class='navbar-text count_down'></p></li>
-                <li><p class='navbar-text'><button class='btn btn-warning btn_load_stock'>手動更新</button></p></li>
+                <li><p class='navbar-text'><button class='btn btn-primary btn_load_stock'>手動更新</button></p></li>
                 <li><p class='navbar-text'><button class='btn btn-warning btn_switch'>停止自動更新</button></p></li>
-                <li><p class='navbar-text tse'>上市 10469.35 ▲256.5</p></li>
-                <li><p class='navbar-text otc'>上櫃 142.24 ▲256.5</p></li>
-                <!--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#aaa">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>-->
+                <li>
+                    <p class='navbar-text navbar-form navbar-right'>
+                        <input type='text' name='index' class='form-control' placeholder='股票代碼'>
+                        <button class='btn btn-primary btn_add'>新增</button>
+                    </p>
+                </li>
             </ul>
-            <div class='navbar-form navbar-right'>
-                <input type='text' name='index' class='form-control' placeholder='股票代碼'>
-                <button class='btn btn-primary btn_add'>新增</button>
-            </div>
         </div>
     </nav>
     <div class='stock_group'>
