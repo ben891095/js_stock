@@ -5,7 +5,8 @@ var set_count_down = 181;
 //剩餘時間
 var count_down = set_count_down; 
 var switch_count_down = true; 
-console.log(js_get_cookie(cookie_name));
+//console.log(js_get_cookie(cookie_name));
+//js_del_cookie(cookie_name);
 
 /* ajax 股票取資料
  * 
@@ -33,23 +34,47 @@ function gen_stock_block () {
     
     //股票列表
     var stock_array = js_get_cookie(cookie_name).split(',');
-
-    $.each(stock_array, function(key, value) {
-        var stock_block = 
-            "<div class='stock_block' data-stock_index='"+value+"'>" +
-                "<div class='index'></div>" +
-                "<div class='name'></div>" +
-                "<div class='deal'></div>" +
-                "<div class='change'></div>" +
-                "<div class='change_range'></div>" +
-                "<div class='volume'></div>" +
-                "<div class='volume_total'></div>" +
-                "<div class='link'><a class='btn btn-info btn-sm' href='http://pchome.megatime.com.tw/stock/sto0/ock1/sid"+value+".html' target='_blank'>連結</a></div>" +
-                "<div class='delete'><button class='btn btn-danger btn-sm btn_del'>刪除</button></div>" +
+    var stock_block = '';
+    
+    if (stock_array[0] != '') {
+        $.each(stock_array, function(key, value) {
+            stock_block = stock_block + 
+                "<div class='stock_block' data-stock_index='"+value+"'>" +
+                    "<div class='index'></div>" +
+                    "<div class='name'></div>" +
+                    "<div class='deal'></div>" +
+                    "<div class='change'></div>" +
+                    "<div class='change_range'></div>" +
+                    "<div class='volume'></div>" +
+                    "<div class='volume_total'></div>" +
+                    "<div class='link'><a class='btn btn-primary btn-sm' href='http://pchome.megatime.com.tw/stock/sto0/ock1/sid"+value+".html' target='_blank'>連結</a></div>" +
+                    "<div class='delete'><button class='btn btn-danger btn-sm btn_del'>刪除</button></div>" +
+                "</div>";
+        });
+        
+        //console.log(stock_block);
+    }
+    else {
+        //cookie 沒有股票資料
+        stock_block = 
+            "<div class='stock_block'>" +
+                "*使用方式 在右上方輸入股票代碼<br>" +
+                "*左邊為股票資料顯示方式" +
+            "</div>" +
+            "<div class='stock_block'>" +
+                "<div class='index'>編號</div>" + 
+                "<div class='name'>名稱</div>" +
+                "<div class='deal'>成交價</div>" +
+                "<div class='change'>漲跌</div>" +
+                "<div class='change_range'>漲跌幅</div>" +
+                "<div class='volume'>單量</div>" +
+                "<div class='volume_total'>總量</div>" +
+                "<div class='link'><button class='btn btn-primary btn-sm'>連結</button></div>" +
+                "<div class='delete'><button class='btn btn-danger btn-sm'>刪除</button></div>" +
             "</div>";
-            
-        $('.stock_group').append(stock_block);  
-    });
+    }
+    
+    $('.stock_group').append(stock_block); 
 }
 
 /* 載入上市上櫃資料
@@ -65,14 +90,16 @@ function load_index_stock () {
             var change = parseFloat(stock_data['184']);
             var this_index_stock = $('.'+key);
             
+            this_index_stock.removeClass('font_red font_green');
+            
             var index_str = stock_data['name']+' '+stock_data['125'];
             if (change > 0) {
                 this_index_stock.addClass('font_red');
-                index_str = index_str + '▲'+change;
+                index_str = index_str + ' ▲'+change;
             }
             else if (change < 0){
                 this_index_stock.addClass('font_green');
-                index_str = index_str + '▲'+change;
+                index_str = index_str + ' ▼'+change;
             }
             
             this_index_stock.text(index_str);
@@ -87,53 +114,57 @@ function load_stock_data () {
     //股票列表
     var stock_array = js_get_cookie(cookie_name).split(',');
     
-    $.each(stock_array, function(key, value) {
-        yahoo_stock_data(value, function(stock_data) {
-            //console.log(stock_data);
-            //125成交, 126開盤, 128昨量, 129昨收, 130最高, 131最低, 132漲停價, 133跌停價, 172振幅, 184漲跌, 185漲幅, 404總量, 413單量
-            stock_data = stock_data['mem'];
-            var this_stock_block = $('.stock_block[data-stock_index='+value+']');
-            var deal = parseFloat(stock_data['125']);
-            var change = parseFloat(stock_data['184']);
-            var limit_up = parseFloat(stock_data['132']);
-            var limit_down = parseFloat(stock_data['133']);
-            
-            //highlighted background
-            if (stock_data['404'] != this_stock_block.find('.volume_total').text()) {
-                this_stock_block.addClass('highlighted');
-                 setTimeout(function () {
-                    this_stock_block.removeClass('highlighted');
-                }, 500);
-            }
-            
-            this_stock_block.find('.index').text(stock_data['id']);
-            this_stock_block.find('.name').text(stock_data['name']);
-            this_stock_block.find('.deal').text(stock_data['125']);
-            this_stock_block.find('.change_range').text(Math.round(stock_data['185']*100)/100+'%');
-            this_stock_block.find('.volume').text(stock_data['413']);
-            this_stock_block.find('.volume_total').text(stock_data['404']);
-            
-            if (deal == limit_up) {
-                this_stock_block.addClass('bg_red');
-                this_stock_block.find('.change').text('▲'+change);
-            }
-            else if (deal == limit_down) {
-                this_stock_block.addClass('bg_green');
-                this_stock_block.find('.change').text('▼'+change);
-            }
-            else if (change > 0) {
-                this_stock_block.addClass('font_red');
-                this_stock_block.find('.change').text('▲'+change);
-            }
-            else if (change < 0) {
-                this_stock_block.addClass('font_green');
-                this_stock_block.find('.change').text('▼'+change);
-            }
-            else {
-                this_stock_block.find('.change').text(change);
-            }
+    if (stock_array[0] != '') {
+        $.each(stock_array, function(key, value) {
+            yahoo_stock_data(value, function(stock_data) {
+                //console.log(stock_data);
+                //125成交, 126開盤, 128昨量, 129昨收, 130最高, 131最低, 132漲停價, 133跌停價, 172振幅, 184漲跌, 185漲幅, 404總量, 413單量
+                stock_data = stock_data['mem'];
+                var this_stock_block = $('.stock_block[data-stock_index='+value+']');
+                var deal = parseFloat(stock_data['125']);
+                var change = parseFloat(stock_data['184']);
+                var limit_up = parseFloat(stock_data['132']);
+                var limit_down = parseFloat(stock_data['133']);
+                
+                //highlighted background
+                if (stock_data['404'] != this_stock_block.find('.volume_total').text()) {
+                    this_stock_block.addClass('highlighted');
+                    setTimeout(function () {
+                        this_stock_block.removeClass('highlighted');
+                    }, 500);
+                }
+                
+                this_stock_block.find('.index').text(stock_data['id']);
+                this_stock_block.find('.name').text(stock_data['name']);
+                this_stock_block.find('.deal').text(stock_data['125']);
+                this_stock_block.find('.change_range').text(Math.round(stock_data['185']*100)/100+'%');
+                this_stock_block.find('.volume').text(stock_data['413']);
+                this_stock_block.find('.volume_total').text(stock_data['404']);
+                
+                this_stock_block.removeClass('bg_red bg_green font_red font_green');
+                
+                if (deal == limit_up) {
+                    this_stock_block.addClass('bg_red');
+                    this_stock_block.find('.change').text('▲'+change);
+                }
+                else if (deal == limit_down) {
+                    this_stock_block.addClass('bg_green');
+                    this_stock_block.find('.change').text('▼'+change);
+                }
+                else if (change > 0) {
+                    this_stock_block.addClass('font_red');
+                    this_stock_block.find('.change').text('▲'+change);
+                }
+                else if (change < 0) {
+                    this_stock_block.addClass('font_green');
+                    this_stock_block.find('.change').text('▼'+change);
+                }
+                else {
+                    this_stock_block.find('.change').text(change);
+                }
+            });
         });
-    });
+    }
 }
 
 //控制股票更新資料 

@@ -5,39 +5,47 @@ head, body {
   color: #CCCCCC;
   background: #1A1A1A;
   font-family: 微軟正黑體;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: bold; }
 
 .navbar-inverse {
   background: #0D0D0D; }
 
-.navbar-right {
-  margin-right: 0px; }
+@media only screen and (min-width: 297px) {
+  .stock_group, .stock_index {
+    max-width: 280px; } }
 
-@media only screen and (min-width: 477px) {
-  .stock_group {
-    max-width: 460px; } }
+@media only screen and (min-width: 577px) {
+  .stock_group, .stock_index {
+    max-width: 560px; } }
 
-@media only screen and (min-width: 707px) {
-  .stock_group {
-    max-width: 690px; } }
+@media only screen and (min-width: 857px) {
+  .stock_group, .stock_index {
+    max-width: 840px; } }
 
-@media only screen and (min-width: 937px) {
-  .stock_group {
-    max-width: 920px; } }
+@media only screen and (min-width: 1137px) {
+  .stock_group, .stock_index {
+    max-width: 1120px; } }
 
-@media only screen and (min-width: 1167px) {
-  .stock_group {
-    max-width: 1150px; } }
+@media only screen and (min-width: 1417px) {
+  .stock_group, .stock_index {
+    max-width: 1400px; } }
+
+.stock_index {
+  margin: 0px auto; }
+  .stock_index table {
+    width: 100%; }
+    .stock_index table td {
+      padding: 0px 15px; }
 
 .stock_group {
   margin: 20px auto; }
 
 .stock_block {
-  margin: 0px 15px 20px 15px;
-  padding: 0px 5px;
-  width: 200px;
-  height: 200px;
+  margin: 15px 15px 15px 15px;
+  padding: 5px 5px;
+  width: 250px;
+  height: 250px;
   display: inline-block;
   border-radius: 10px;
   background: #0D0D0D;
@@ -47,7 +55,7 @@ head, body {
   cursor: pointer; }
   .stock_block .index, .stock_block .name, .stock_block .change, .stock_block .change_range, .stock_block .volume, .stock_block .volume_total, .stock_block .link, .stock_block .delete {
     margin-top: 10px;
-    width: 90px; }
+    width: 110px; }
   .stock_block .index, .stock_block .change, .stock_block .volume, .stock_block .link {
     float: left;
     padding-left: 15px; }
@@ -59,17 +67,16 @@ head, body {
     float: left;
     margin-top: 6px;
     width: 100%;
-    height: 70px;
-    font-size: 48px;
+    height: 90px;
+    font-size: 56px;
     text-align: center; }
   .stock_block .btn {
-    width: 90%;
+    width: 100%;
     padding: 0px;
-    font-weight: bold;
     font-size: 18px; }
 
 .stock_block:hover {
-  height: 250px;
+  height: 300px;
   -webkit-transition: 1s;
   -o-transition: 1s;
   transition: 1s; }
@@ -78,17 +85,17 @@ head, body {
   background: #FFFF6F; }
 
 .bg_red {
-  background: #750000; }
+  background: #EA0000; }
 
 .bg_green {
-  background: #009100; }
+  background: #00DB00; }
 
 .font_red {
-  color: #750000 !important; }
+  color: #EA0000 !important; }
   .font_red .index, .font_red .name, .font_red .btn {
     color: #CCCCCC; }
 
 .font_green {
-  color: #009100 !important; }
+  color: #00DB00 !important; }
   .font_green .index, .font_green .name, .font_green .btn {
     color: #CCCCCC; }
