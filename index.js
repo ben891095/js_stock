@@ -43,6 +43,9 @@ function gen_stock_block () {
                     "<div class='index'></div>" +
                     "<div class='name'></div>" +
                     "<div class='deal'></div>" +
+                    "<div class='kline'>" +
+                        "<svg><line x1=15 y1=0 x2=15 y2=100></line><rect></rect></svg>" + 
+                    "</div>" +
                     "<div class='change'></div>" +
                     "<div class='change_range'></div>" +
                     "<div class='volume'></div>" +
@@ -141,27 +144,53 @@ function load_stock_data () {
                 this_stock_block.find('.volume').text(stock_data['413']);
                 this_stock_block.find('.volume_total').text(stock_data['404']);
                 
+                //畫k線
+                var high = parseFloat(stock_data['130']);
+                var low = parseFloat(stock_data['131']);
+                var open = parseFloat(stock_data['126']);
+                
+                var open_base = (100/(high - low))*(open - low);
+                var deal_base = (100/(high - low))*(deal - low);
+                var rect_y_axis = 0;
+                var rect_height = 0;
+                
+                //上色
                 this_stock_block.removeClass('bg_red bg_green font_red font_green');
                 
                 if (deal == limit_up) {
                     this_stock_block.addClass('bg_red');
                     this_stock_block.find('.change').text('▲'+change);
+                    rect_y_axis = 100 - deal_base;
+                    rect_height = deal_base - open_base;
                 }
                 else if (deal == limit_down) {
                     this_stock_block.addClass('bg_green');
                     this_stock_block.find('.change').text('▼'+change);
+                    rect_y_axis = 100 - open_base;
+                    rect_height = open_base - deal_base;
                 }
                 else if (change > 0) {
                     this_stock_block.addClass('font_red');
                     this_stock_block.find('.change').text('▲'+change);
+                    rect_y_axis = 100 - deal_base;
+                    rect_height = deal_base - open_base;
+                    
                 }
                 else if (change < 0) {
                     this_stock_block.addClass('font_green');
                     this_stock_block.find('.change').text('▼'+change);
+                    rect_y_axis = 100 - open_base;
+                    rect_height = open_base - deal_base;
                 }
                 else {
                     this_stock_block.find('.change').text(change);
+                    rect_y_axis = 95 - open_base;
+                    rect_height = 5;
                 }
+                
+                //k線
+                this_stock_block.find('.kline rect').attr('x', 0).attr('y', rect_y_axis).attr('width', 30).attr('height', rect_height);
+                
             });
         });
     }

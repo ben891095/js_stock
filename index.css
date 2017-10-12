@@ -54,7 +54,7 @@ head, body {
   overflow: hidden;
   cursor: pointer; }
   .stock_block .index, .stock_block .name, .stock_block .change, .stock_block .change_range, .stock_block .volume, .stock_block .volume_total, .stock_block .link, .stock_block .delete {
-    margin-top: 10px;
+    margin-top: 6px;
     width: 110px; }
   .stock_block .index, .stock_block .change, .stock_block .volume, .stock_block .link {
     float: left;
@@ -63,11 +63,25 @@ head, body {
     float: right;
     padding-right: 15px;
     text-align: right; }
+  .stock_block .kline {
+    float: left;
+    margin-top: 10px;
+    width: 30px;
+    height: 100px; }
+    .stock_block .kline svg {
+      width: 100%;
+      height: 100%; }
+      .stock_block .kline svg line {
+        stroke-width: 5px;
+        stroke: #CCCCCC; }
+      .stock_block .kline svg rect {
+        fill: #CCCCCC; }
   .stock_block .deal {
     float: left;
-    margin-top: 6px;
-    width: 100%;
-    height: 90px;
+    margin-top: 10px;
+    padding-top: 5px;
+    width: 190px;
+    height: 100px;
     font-size: 56px;
     text-align: center; }
   .stock_block .btn {
@@ -85,17 +99,25 @@ head, body {
   background: #FFFF6F; }
 
 .bg_red {
-  background: #EA0000; }
+  background: #AE0000; }
 
 .bg_green {
-  background: #00DB00; }
+  background: #009100; }
 
 .font_red {
-  color: #EA0000 !important; }
+  color: #AE0000 !important; }
+  .font_red .kline line {
+    stroke: #AE0000 !important; }
+  .font_red .kline rect {
+    fill: #AE0000 !important; }
   .font_red .index, .font_red .name, .font_red .btn {
     color: #CCCCCC; }
 
 .font_green {
-  color: #00DB00 !important; }
+  color: #009100 !important; }
+  .font_green .kline line {
+    stroke: #009100 !important; }
+  .font_green .kline rect {
+    fill: #009100 !important; }
   .font_green .index, .font_green .name, .font_green .btn {
     color: #CCCCCC; }
