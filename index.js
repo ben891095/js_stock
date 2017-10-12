@@ -188,6 +188,11 @@ function load_stock_data () {
                     rect_height = 5;
                 }
                 
+                //防止線不見
+                if (rect_height < 5) {
+                    rect_height = 5;
+                }
+                
                 //k線
                 this_stock_block.find('.kline rect').attr('x', 0).attr('y', rect_y_axis).attr('width', 30).attr('height', rect_height);
                 
