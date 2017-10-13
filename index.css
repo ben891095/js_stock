@@ -3,7 +3,7 @@ head, body {
   margin: 0px 0px;
   padding: 0px 0px;
   color: #CCCCCC;
-  background: #1A1A1A;
+  background: #1F1F1F;
   font-family: 微軟正黑體;
   font-size: 24px;
   font-weight: bold; }
@@ -55,7 +55,8 @@ head, body {
   cursor: pointer; }
   .stock_block .index, .stock_block .name, .stock_block .change, .stock_block .change_range, .stock_block .volume, .stock_block .volume_total, .stock_block .link, .stock_block .delete {
     margin-top: 6px;
-    width: 110px; }
+    width: 110px;
+    height: 35px; }
   .stock_block .index, .stock_block .change, .stock_block .volume, .stock_block .link {
     float: left;
     padding-left: 15px; }
@@ -63,6 +64,12 @@ head, body {
     float: right;
     padding-right: 15px;
     text-align: right; }
+  .stock_block .name {
+    /*單行文字限制*/
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap; }
   .stock_block .kline {
     float: left;
     margin-top: 10px;
@@ -74,7 +81,7 @@ head, body {
       .stock_block .kline svg line {
         stroke-width: 5px;
         stroke: #CCCCCC; }
-      .stock_block .kline svg rect {
+      .stock_block .kline svg polyline {
         fill: #CCCCCC; }
   .stock_block .deal {
     float: left;
@@ -106,18 +113,22 @@ head, body {
 
 .font_red {
   color: #AE0000 !important; }
-  .font_red .kline line {
-    stroke: #AE0000 !important; }
-  .font_red .kline rect {
-    fill: #AE0000 !important; }
   .font_red .index, .font_red .name, .font_red .btn {
     color: #CCCCCC; }
 
 .font_green {
   color: #009100 !important; }
-  .font_green .kline line {
-    stroke: #009100 !important; }
-  .font_green .kline rect {
-    fill: #009100 !important; }
   .font_green .index, .font_green .name, .font_green .btn {
     color: #CCCCCC; }
+
+.k_red svg line {
+  stroke: #AE0000 !important; }
+
+.k_red svg polyline {
+  fill: #AE0000 !important; }
+
+.k_green svg line {
+  stroke: #009100 !important; }
+
+.k_green svg polyline {
+  fill: #009100 !important; }

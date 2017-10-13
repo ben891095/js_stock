@@ -43,9 +43,7 @@ function gen_stock_block () {
                     "<div class='index'></div>" +
                     "<div class='name'></div>" +
                     "<div class='deal'></div>" +
-                    "<div class='kline'>" +
-                        "<svg><line x1=15 y1=0 x2=15 y2=100></line><rect></rect></svg>" + 
-                    "</div>" +
+                    "<div class='kline'><svg><line></line><polyline></polyline></svg></div>" +
                     "<div class='change'></div>" +
                     "<div class='change_range'></div>" +
                     "<div class='volume'></div>" +
@@ -61,13 +59,14 @@ function gen_stock_block () {
         //cookie 沒有股票資料
         stock_block = 
             "<div class='stock_block'>" +
-                "*使用方式 在右上方輸入股票代碼<br>" +
+                "*使用方式 在右上方輸入股票代碼<br><br>" +
                 "*左邊為股票資料顯示方式" +
             "</div>" +
             "<div class='stock_block'>" +
                 "<div class='index'>編號</div>" + 
                 "<div class='name'>名稱</div>" +
                 "<div class='deal'>成交價</div>" +
+                "<div class='kline'>K線</div>" +
                 "<div class='change'>漲跌</div>" +
                 "<div class='change_range'>漲跌幅</div>" +
                 "<div class='volume'>單量</div>" +
@@ -123,6 +122,7 @@ function load_stock_data () {
                 //console.log(stock_data);
                 //125成交, 126開盤, 128昨量, 129昨收, 130最高, 131最低, 132漲停價, 133跌停價, 172振幅, 184漲跌, 185漲幅, 404總量, 413單量
                 stock_data = stock_data['mem'];
+                
                 var this_stock_block = $('.stock_block[data-stock_index='+value+']');
                 var deal = parseFloat(stock_data['125']);
                 var change = parseFloat(stock_data['184']);
@@ -137,6 +137,7 @@ function load_stock_data () {
                     }, 500);
                 }
                 
+                //填資料
                 this_stock_block.find('.index').text(stock_data['id']);
                 this_stock_block.find('.name').text(stock_data['name']);
                 this_stock_block.find('.deal').text(stock_data['125']);
@@ -144,57 +145,71 @@ function load_stock_data () {
                 this_stock_block.find('.volume').text(stock_data['413']);
                 this_stock_block.find('.volume_total').text(stock_data['404']);
                 
-                //畫k線
-                var high = parseFloat(stock_data['130']);
-                var low = parseFloat(stock_data['131']);
-                var open = parseFloat(stock_data['126']);
-                
-                var open_base = (100/(high - low))*(open - low);
-                var deal_base = (100/(high - low))*(deal - low);
-                var rect_y_axis = 0;
-                var rect_height = 0;
-                
                 //上色
                 this_stock_block.removeClass('bg_red bg_green font_red font_green');
                 
                 if (deal == limit_up) {
                     this_stock_block.addClass('bg_red');
                     this_stock_block.find('.change').text('▲'+change);
-                    rect_y_axis = 100 - deal_base;
-                    rect_height = deal_base - open_base;
                 }
                 else if (deal == limit_down) {
                     this_stock_block.addClass('bg_green');
                     this_stock_block.find('.change').text('▼'+change);
-                    rect_y_axis = 100 - open_base;
-                    rect_height = open_base - deal_base;
                 }
                 else if (change > 0) {
                     this_stock_block.addClass('font_red');
                     this_stock_block.find('.change').text('▲'+change);
-                    rect_y_axis = 100 - deal_base;
-                    rect_height = deal_base - open_base;
                     
                 }
                 else if (change < 0) {
                     this_stock_block.addClass('font_green');
                     this_stock_block.find('.change').text('▼'+change);
-                    rect_y_axis = 100 - open_base;
-                    rect_height = open_base - deal_base;
                 }
                 else {
                     this_stock_block.find('.change').text(change);
-                    rect_y_axis = 95 - open_base;
-                    rect_height = 5;
                 }
                 
-                //防止線不見
-                if (rect_height < 5) {
-                    rect_height = 5;
-                }
+                //畫k線
+                var high = stock_data['130'] == undefined ? 0 : parseFloat(stock_data['130']);
+                var low = stock_data['131'] == undefined ? 0 : parseFloat(stock_data['131']);
+                var open = stock_data['126'] == undefined ? 0 : parseFloat(stock_data['126']);
+                var open_axis = (high - low) == 0 ? 0 : 100 - (100/(high - low))*(open - low);
+                var deal_axis = (high - low) == 0 ? 0 : 100 - (100/(high - low))*(deal - low);
                 
-                //k線
-                this_stock_block.find('.kline rect').attr('x', 0).attr('y', rect_y_axis).attr('width', 30).attr('height', rect_height);
+                this_stock_block.find('.kline').removeClass('k_red k_green');
+                
+                if (high == low) {
+                    //中間
+                    this_stock_block.find('.kline polyline').attr('points', '0,50 30,50 30,45 0,45');
+                }
+                else {
+                    //k線上色
+                    if (deal > open){
+                        //紅
+                        this_stock_block.find('.kline').addClass('k_red');
+                    }
+                    else if (deal < open) {
+                        //綠
+                        this_stock_block.find('.kline').addClass('k_green');
+                    }
+                    
+                    //頂部 與 底部 防止被切掉
+                    if (open_axis == deal_axis) {
+                        if (open_axis > 99) {
+                            deal_axis = deal_axis-5;
+                        }
+                        else if (open_axis < 1) {
+                            deal_axis = deal_axis+5;
+                        }
+                        else {
+                            open_axis = open_axis - 2.5;
+                            deal_axis = deal_axis + 2.5;
+                        }
+                    }
+                    
+                    this_stock_block.find('.kline line').attr('x1',15).attr('y1',0).attr('x2',15).attr('y2',100);
+                    this_stock_block.find('.kline polyline').attr('points', '0,'+open_axis+' 30,'+open_axis+' 30,'+deal_axis+' 0,'+deal_axis+'');
+                }
                 
             });
         });

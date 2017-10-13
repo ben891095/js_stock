@@ -11,7 +11,7 @@ head, body {
     margin: 0px 0px;
     padding: 0px 0px;
     color: $color_white;
-    background: #1A1A1A;
+    background: #1F1F1F;
     font-family: 微軟正黑體;
     font-size:24px;
     font-weight: bold;
@@ -89,6 +89,7 @@ head, body {
     .index, .name, .change, .change_range, .volume, .volume_total, .link, .delete  {
         margin-top: 6px;
         width: 110px;
+        height: 35px
     }
     
     .index, .change, .volume, .link{
@@ -101,6 +102,13 @@ head, body {
         padding-right: 15px;
         text-align: right;
     } 
+    
+    .name {
+        /*單行文字限制*/
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
     
     .kline {
         float: left;
@@ -117,7 +125,7 @@ head, body {
                 stroke: $color_white;
             }
             
-            rect {
+            polyline {
                 fill: $color_white;
             }
         }
@@ -149,50 +157,56 @@ head, body {
     background: #FFFF6F;
 }
 
-//漲停
+//漲停 紅
 .bg_red {
     background: $color_red;
 }
 
-//跌停 
+//跌停 綠
 .bg_green {
     background: $color_green;
 }
 
-//漲
+//漲 紅
 .font_red  {
     color: $color_red !important;
-    
-    .kline {
-        line {
-            stroke: $color_red !important;
-        }
-        
-        rect {
-            fill: $color_red !important;
-        }
-    }
     
     .index, .name, .btn {
         color: $color_white;
     }
 }
 
-//跌
+//跌 綠
 .font_green {
     color: $color_green !important;
     
-    .kline {
+    .index, .name, .btn {
+        color: $color_white;
+    }
+}
+
+//k 線 紅
+.k_red {
+    svg {
+        line {
+            stroke: $color_red !important;
+        }
+        
+        polyline {
+            fill: $color_red !important;
+        }
+    }
+}
+
+//k 線 綠
+.k_green {
+    svg {
         line {
             stroke: $color_green !important;
         }
         
-        rect {
+        polyline {
             fill: $color_green !important;
         }
-    }
-    
-    .index, .name, .btn {
-        color: $color_white;
     }
 }
