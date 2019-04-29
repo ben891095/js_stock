@@ -53,14 +53,18 @@ head, body {
   vertical-align: top;
   overflow: hidden;
   cursor: pointer; }
-  .stock_block .index, .stock_block .name, .stock_block .change, .stock_block .change_range, .stock_block .volume, .stock_block .volume_total, .stock_block .link, .stock_block .delete {
+  .stock_block .index, .stock_block .name, .stock_block .change, .stock_block .change_range, .stock_block .volume, .stock_block .volume_total {
     margin-top: 6px;
     width: 110px;
     height: 35px; }
-  .stock_block .index, .stock_block .change, .stock_block .volume, .stock_block .link {
+  .stock_block .index, .stock_block .change, .stock_block .volume, .stock_block .link, .stock_block .delete {
     float: left;
     padding-left: 15px; }
-  .stock_block .name, .stock_block .change_range, .stock_block .volume_total, .stock_block .delete {
+  .stock_block .link, .stock_block .delete {
+    margin-top: 6px;
+    width: 75px;
+    height: 35px; }
+  .stock_block .name, .stock_block .change_range, .stock_block .volume_total {
     float: right;
     padding-right: 15px;
     text-align: right; }

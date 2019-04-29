@@ -1,10 +1,10 @@
 
 var cookie_name = 'cookie_stock';
 //設定更新時間(秒)
-var set_count_down = 181; 
+var set_count_down = 180; 
 //剩餘時間
 var count_down = set_count_down; 
-var switch_count_down = true; 
+var switch_count_down = false; 
 //console.log(js_get_cookie(cookie_name));
 //js_del_cookie(cookie_name);
 
@@ -48,7 +48,8 @@ function gen_stock_block () {
                     "<div class='change_range'></div>" +
                     "<div class='volume'></div>" +
                     "<div class='volume_total'></div>" +
-                    "<div class='link'><a class='btn btn-primary btn-sm' href='http://pchome.megatime.com.tw/stock/sto0/ock1/sid"+value+".html' target='_blank'>連結</a></div>" +
+                    "<div class='link'><a class='btn btn-success btn-sm' href='https://tw.stock.yahoo.com/q/bc?s="+value+"' target='_blank'>五檔</a></div>" +
+                    "<div class='link'><a class='btn btn-primary btn-sm' href='http://pchome.megatime.com.tw/stock/sto0/ock1/sid"+value+".html' target='_blank'>線圖</a></div>" +
                     "<div class='delete'><button class='btn btn-danger btn-sm btn_del'>刪除</button></div>" +
                 "</div>";
         });
@@ -225,6 +226,7 @@ function control_load_stock() {
     //產生時間字串
     var d = new Date();
     $('.now').text('更新時間 '+ d.getHours()+':'+d.getMinutes()+':'+d.getSeconds());
+    $('.count_down').text('倒數更新 ' + count_down);
     
     //重新計時
     count_down = set_count_down; 

@@ -86,18 +86,24 @@ head, body {
     overflow: hidden;
     cursor:pointer;
     
-    .index, .name, .change, .change_range, .volume, .volume_total, .link, .delete  {
+    .index, .name, .change, .change_range, .volume, .volume_total {
         margin-top: 6px;
         width: 110px;
         height: 35px
     }
     
-    .index, .change, .volume, .link{
+    .index, .change, .volume, .link, .delete {
         float: left;
         padding-left: 15px;
     }
     
-    .name, .change_range, .volume_total, .delete {
+    .link, .delete {
+        margin-top: 6px;
+        width: 75px;
+        height: 35px;
+    }    
+    
+    .name, .change_range, .volume_total {
         float: right;
         padding-right: 15px;
         text-align: right;
@@ -185,7 +191,7 @@ head, body {
     }
 }
 
-//k 線 紅
+//k線 紅
 .k_red {
     svg {
         line {
@@ -198,7 +204,7 @@ head, body {
     }
 }
 
-//k 線 綠
+//k線 綠
 .k_green {
     svg {
         line {
